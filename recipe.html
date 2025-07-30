@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>레시피 상세 보기</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container py-5" id="recipe-container"></div>
+
+        <script>
+            const snacks = [
+                {
+                    name: "별모양 딸기잼 토스트",
+                    description: "별모양으로 귀엽게 만든 딸기잼 토스트 레시피 영상입니다.",
+                    tags: ["#토스트", "#딸기잼", "#별모양"],
+                    image: "https://img.youtube.com/vi/IrcL7szdlS8/maxresdefault.jpg",
+                    recipeSteps: [
+                        "1. 식빵을 별 모양 커터로 찍어낸다.",
+                        "2. 한쪽 면에 딸기잼을 바른다.",
+                        "3. 다른 조각으로 덮고 가장자리를 꾹 눌러 붙인다.",
+                        "4. 에어프라이어나 팬에 구워 바삭하게 만든다.",
+                    ],
+                },
+                // 다른 레시피들도 동일한 구조로 추가
+            ];
+
+            const params = new URLSearchParams(window.location.search);
+            const index = parseInt(params.get("index"), 10);
+            const snack = snacks[index];
+            const container = document.getElementById("recipe-container");
+
+            if (snack) {
+                container.innerHTML = `
+        <div class="card mx-auto snack-card p-4" style="max-width: 700px;">
+          <img src="${snack.image}" class="card-img-top mb-4" alt="${snack.name}">
+          <div class="card-body">
+            <h2 class="card-title mb-3">${snack.name}</h2>
+            <p class="mb-3">${snack.description}</p>
+            <div class="mb-3">
+              ${snack.tags.map((tag) => `<span class="tag">${tag}</span>`).join(" ")}
+            </div>
+            <h5 class="fw-bold">만드는 방법</h5>
+            <ul>
+              ${snack.recipeSteps.map((step) => `<li>${step}</li>`).join("")}
+            </ul>
+            <a href="index.html" class="btn btn-secondary mt-4">← 목록으로 돌아가기</a>
+          </div>
+        </div>
+      `;
+            } else {
+                container.innerHTML = `<p class="text-center text-danger">레시피를 찾을 수 없습니다.</p>`;
+            }
+        </script>
+    </body>
+</html>

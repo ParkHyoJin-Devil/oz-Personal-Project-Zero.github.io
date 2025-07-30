@@ -24,22 +24,23 @@ const snacks = [
 
 const snackList = document.getElementById("snack-list");
 
-snacks.forEach((snack) => {
+snacks.forEach((snack, index) => {
     const col = document.createElement("div");
     col.className = "col-md-4 mb-4";
 
     col.innerHTML = `
-      <div class="card snack-card h-100">
-        <img src="${snack.image}" class="card-img-top" alt="${snack.name}">
-        <div class="card-body">
-          <h5 class="card-title">${snack.name}</h5>
-          <p>
-            ${snack.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
-          </p>
-          <a href="${snack.link}" target="_blank" class="btn btn-outline-primary mt-2">보러가기</a>
-        </div>
+    <div class="card snack-card h-100">
+      <img src="${snack.image}" class="card-img-top" alt="${snack.name}">
+      <div class="card-body">
+        <h5 class="card-title">${snack.name}</h5>
+        <p>
+          ${snack.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+        </p>
+        <a href="${snack.link}" target="_blank" class="btn btn-outline-primary mt-2">보러가기</a>
+        <a href="recipe.html?index=${index}" class="btn btn-outline-success mt-2 ms-2">레시피 확인</a>
       </div>
-    `;
+    </div>
+  `;
 
     snackList.appendChild(col);
 });
